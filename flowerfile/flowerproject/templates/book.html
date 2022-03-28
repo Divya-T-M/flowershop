@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive flower website design tutorial</title>
+    <link rel="icon" type="image" href="{% static 'images/flo.png' %}">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylecus.css' %}">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header>
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="{% url 'flower:home' %}" class="logo"><img src="{% static 'images/flo.png' %}" width="40" height="40"> flower<span>.</span></a>
+
+   <nav class="navbar">
+<!--        <ul class="d-flex flex-row align-items-start justify-content-start">-->
+<!--        <a href="{% url 'flower:home' %}">home</a>-->
+<!--        <a href="#about">about</a>-->
+<!--        <a href="#products">products</a>-->
+<!--			<div>-->
+<!--        <ul>-->
+        {% if user.is_authenticated %}
+            <div><a><b>Hello {{user.username}}</b></a>
+            <a href="{% url 'connect:logout' %}">Logout</a></div>
+            {% else %}
+            <div><a href="{% url 'connect:register' %}">Register</a>
+            <a href="{% url 'connect:login' %}">Login</a></div>
+            {% endif %}
+
+         </nav>
+
+
+    <div class="icons">
+        <a href="{% url 'connect:allProdCat' %}" class="fas fa-heart"></a>
+        <a href="{% url 'cart:cart_detail' %}" class="fas fa-shopping-cart"></a>
+<!--        <a href="#" class="fas fa-user"></a>-->
+    </div>
+
+</header>
+
+    <div class="main">
+       <br><br><br><br> <section class="about" id="about">
+  <h1 class="heading"> <span> Gallery </span></h1>
+        </section>
+        <div class="gallery">
+  <a target="_blank" href="img_5terre.jpg">
+    <img src="{% static 'images/bg5.jpg' %}" alt="Cinque Terre" width="600" height="400">
+  </a>
+  <div class="desc">Daisy</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg6.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Daffodils</div>
+</div>
+        <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg7.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Dahlia</div>
+</div>
+        <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/chry.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">chrysanthemum</div>
+</div>
+         <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg9.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Lily</div>
+</div>
+        <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg10.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Hollyhock</div>
+</div>
+        <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg11.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Lilac</div>
+</div>
+        <div class="gallery">
+  <a target="_blank" href="#">
+    <img src="{% static 'images/bg12.jpg' %}" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Primrose</div>
+</div>
+    </div>
+
+    <div class="side-bar-right">
+<div class="right_side" >
+      <h1 style="text-align: center;">Delivery Address</h1>
+      <form method="post" id="customerForm" data-sellers-url="{% url 'flower:ajax_load_sellers' %}" >
+          {% csrf_token %}
+
+          {{ form.as_p }}
+
+
+          <div class="button" style="width:70%; align: center;"><input type="submit" value="Add Address">
+
+        </div>
+      </form>
+</div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_district").change(function () {
+        cost url = $("#customerForm").attr("data-sellers-url");
+        cost districtId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'district_id': districtId
+            },
+            success: function (data) {
+                console.log(data)
+                $("#id_seller").html(data);
+
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+.header{
+	width:1350px;
+	height:141px;
+	background:url(../images/flowerban.png)  no-repeat center;
+	}
+.logo{
+padding:0 0 0 30px;
+}
+/*-----------------------------menu-------------------*/
+#menu{
+	width:800px;
+	height:41px;
+	margin:10px 0 0 26px;
+	background-image: url(../images/menu_bg.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+#menu ul{
+display:block;
+list-style:none;
+padding:9px 0 0 10px;
+margin:0px;
+}
+#menu ul li{
+display:inline;
+padding:0px;
+margin:0px;
+height:27px;
+}
+#menu ul li a{
+	height:27px;
+	display:block;
+	padding:0px 10px 0 10px;
+	margin:0 4px 0 4px;
+	_margin:0 2px 0 2px;
+	float:left;
+	text-align:center;
+	color:  #000000;
+	font-size:18px;
+	text-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+	line-height:27px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#menu ul li.selected a{
+	height:27px;
+	display:block;
+	padding:0px 10px 0 10px;
+	margin:0 5px 0 5px;
+	float:left;
+	text-decoration:none;
+	text-align:center;
+	color:#fff;
+	font-size:13px;
+	line-height:27px;
+	background:url(../images/menu_bt_bg.png) no-repeat center;
+}
+#menu ul li a:hover{
+background:url(../images/menu_bt_bg.png) no-repeat center;
+}
+/*----------------crumb_nav------------------*/
+
+/*------------------------------------center content--------------------*/
+.center_content{
+	width:900px;
+	padding:0px 0 0;
+	background:url(../images/center_bg.gif) repeat-y center;
+}
+.left_content{
+width:490px;
+float:left;
+padding:20px 0 20px 20px;
+}
+.right_content{
+width:370px;
+float:left;
+padding:20px 0 20px 20px;
+}
+.title{
+color:#8BB830;
+padding:0px;
+float:left;
+font-size:18px;
+margin:10px 0 10px 0;
+}
+span.title_icon{
+float:left;
+padding:0 5px 0 0;
+}
+.prod_title{
+color:#4C8E0A;
+padding:5px 0 0 15px;
+font-size:13px;
+}
+a.more{
+font-style:italic;
+color:#4C8E0A;
+float:right;
+text-decoration:none;
+font-size:11px;
+padding:0px 15px 0 0 ;
+}
+.about{
+width:335px;
+clear:both;
+background:url(../images/border.gif) no-repeat bottom center;
+padding-bottom: 60px;
+}
+img.right{
+float:right;
+padding:0 0 0 10px;
+}
+.right_box{
+width:170px;
+float:left;
+padding:10px 0 0 0;
+}
+
+.home_page{
+    display: flex;
+    align-items: center;
+
+    width:1350px;
+     height:400px;
+    background:url(../images/slide3.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+
+ .content{
+    top:50%;
+    left:50%;
+    max-width: 50rem;
+}
+
+.content h3{
+    font-size: 6rem;
+    color:#fff;
+    text-align:center;
+}
+
+
+ .content p{
+    font-size: 1.5rem;
+    color:#fff;
+    padding:1rem 0;
+    line-height: 1.5;
+}
+
+/***product popup***/

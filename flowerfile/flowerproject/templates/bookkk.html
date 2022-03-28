@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+	<title>Add address</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/flo.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+<!--===============================================================================================-->
+</head>
+<body style="background-color: #999999;">
+<header>
+
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="{% url 'home' %}" class="logo"><img src="{% static 'images/flo.png' %}" width="40" height="40"> flower<span>.</span></a>
+
+    <nav class="navbar">
+<!--        <ul class="d-flex flex-row align-items-start justify-content-start">-->
+<!--        <a href="{% url 'home' %}">home</a>-->
+<!--        <a href="#about">about</a>-->
+<!--        <a href="#products">products</a>-->
+<!--			<div>-->
+<!--        <ul>-->
+        {% if user.is_authenticated %}
+            <div><a><b>Hello {{user.username}}</b></a>
+            <a href="{% url 'logout' %}">Logout</a></div>
+            {% else %}
+            <div><a href="connect/register">Register</a>
+            <a href="connect/login">Login</a></div>
+            {% endif %}
+            </ul>
+            </div>
+         </nav>
+
+
+    <div class="icons">
+        <a href="connect/cat" class="fas fa-heart"></a>
+        <a href="{% url 'cart:cart_detail' %}" class="fas fa-shopping-cart"></a>
+<!--        <a href="#" class="fas fa-user"></a>-->
+    </div>
+
+</header>
+
+ <div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Add Address
+							</button>
+						</div>
+
+   </div>
+
+	<div class="limiter">
+
+			<div class="container-login100" style="background-image: url({% static 'images/pic.jpg' %});">
+				<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Add Address
+							</button>
+						</div>
+
+   </div>
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+
+				<form method="post" id="customerForm" data-sellers-url="{% url 'ajax_load_sellers' %}"  novalidate>
+                 {% csrf_token %}
+					<span class="login100-form-title p-b-59">
+						Delivery Address
+					</span>
+<!--					<b>-->
+<!--						Contact Details-->
+<!--					</b>-->
+<!--					<div class="wrap-input100 validate-input" data-validate="Username is required">-->
+<!--						<input class="input100" type="text" name="name" placeholder="Name*" required="">-->
+<!--						<span class="focus-input100"></span>-->
+<!--					</div>-->
+
+<!--					<div class="wrap-input100 validate-input" data-validate="Username is required">-->
+<!--						<input class="input100" type="number" name="phonenumber" placeholder="Phone.No*" required="">-->
+<!--						<span class="focus-input100"></span>-->
+<!--					</div>-->
+<!--					<b>Address</b>-->
+<!--					<div class="wrap-input100 validate-input" data-validate="Username is required">-->
+<!--						<input class="input100" type="number" name="pincode" placeholder="Pincode*" required="">-->
+<!--						<span class="focus-input100"></span>-->
+<!--					</div>-->
+<!--					<div class="wrap-input100 validate-input" data-validate="Username is required">-->
+<!--						<input class="input100" type="text" name="name" placeholder="Address(House No, Building, Street, Area)*" required="">-->
+<!--						<span class="focus-input100"></span>-->
+<!--					</div>-->
+
+                         {{ form.as_p }}
+
+					<br>
+   <div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Confirm
+							</button>
+						</div>
+   </div>
+</form>
+
+<script>
+    $("#id_district").change(function () {
+        var url = $("#customerForm").attr("data-sellers-url");
+        var districtId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'district': districtId
+            },
+            success: function (data) {
+                $("#id_seller").html(data);
+
+            }
+        });
+
+    });
+</script>
+           </div>
+	</div>
+	</div>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</body>
+</html>

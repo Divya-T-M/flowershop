@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if category %}
+<div xmlns="http://www.w3.org/1999/html">
+        <div class="row my_row_class">
+            <div class="mx-auto">
+           <p><a href="{% url 'connect:allProdCat' %}">Our product collections</a></p>
+        </div>
+            </div>
+     </div>
+  {% endif %}
+  <div class="mx-auto">
+     {% if category %}
+       <h1 class="text-center my_title" style="font-size:25px;"><b>{{category.name}}</b></h1>
+  </div>
+     {% else %}
+     <div class="home_page" >
+   <div class="content">
+        <h1 style="color:white; text-align:center;">Fresh Flowers</h1>
+       <p style="color:white; text-align:center;">A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants (plants of the division Angiospermae). The biological function of a flower is to facilitate reproduction, usually by providing a mechanism for the union of sperm with eggs. Flowers may facilitate outcrossing (fusion of sperm and eggs from different individuals in a population) resulting from cross-pollination or allow selfing (fusion of sperm and egg from the same flower) when self-pollination occurs.</p>
+       </div>
+         </div>
+{% endif %}
+<div class="flower">
+    <div class="row mx_auto">
+      {% for product in products.object_list %}
+       <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-lg-4">
+        <div class="class text-center">
+          <a href="#"><img class="card-img-top my_image"  src="{{product.image.url}}" alt="{{product.name}}"></a>
+            <div class="card-body">
+             <h4>{{product.name}}</h4>
+             <p><i class="fas fa-rupee-sign"></i> <strong>{{product.price}}</strong></p>
+                  {% if product.stock <= 0 %}
+            <p class="text-justify my_prod_text"><b>Out of stock</b></p>
+            {% else %}
+            <a class="btn btn-success" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="mx_auto">
+        {% if products.paginator.num_pages > 1 %}
+        <br>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <br>
+</div>
+{% endblock %}
